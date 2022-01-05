@@ -26,4 +26,7 @@ dependencies {
 
     // Use JUnit test framework
     testImplementation 'junit:junit:4.12'
+    
+    // codec
+    implementation group: 'commons-codec', name: 'commons-codec', version: '1.15'
 }
