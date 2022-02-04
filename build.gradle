@@ -9,6 +9,7 @@
 plugins {
     // Apply the java-library plugin to add support for Java Library
     id 'java-library'
+    id 'maven-publish'
 }
 
 repositories {
@@ -29,4 +30,36 @@ dependencies {
     
     // codec
     implementation group: 'commons-codec', name: 'commons-codec', version: '1.15'
+}
+
+/*
+//create a single Jar with all dependencies
+jar {
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+         }
+            {
+                exclude "META-INF/*.SF"
+                exclude "META-INF/*.DSA"
+                exclude "META-INF/*.RSA"
+            }
+}
+*/
+
+publishing {
+  publications {
+    maven(MavenPublication) {
+      groupId = 'ys2cdh'
+      artifactId = 'mimeUtility'
+      version = '0.4'
+
+
+      artifact 'build/libs/MimeUtility.jar'
+    }
+  }
+  repositories {
+    maven {
+      url = '/home/ys2cdh/data/repo/maven-repo/releases'
+    }
+  }
 }
